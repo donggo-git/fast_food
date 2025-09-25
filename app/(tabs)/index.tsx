@@ -1,9 +1,21 @@
-import { Text, View } from "react-native";
+import { offers } from "@/constants";
+import { FlatList, Pressable, Text, View } from "react-native";
+//import { FlatList, View } from "react-native-reanimated/lib/typescript/Animated";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-primary text-5xl text-center font-quicksand-bold">Hello NativeWind</Text>
-    </View>
+    <SafeAreaView>
+      <FlatList data={offers} renderItem={
+        ({ item, index }) => {
+          return (
+            <View>
+              <Pressable className="bg-amber-600">
+                <Text>{item.title}</Text>
+              </Pressable>
+            </View>)
+        }
+      } />
+    </SafeAreaView>
   );
 }
