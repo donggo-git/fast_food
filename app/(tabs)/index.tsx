@@ -1,22 +1,25 @@
-import { offers } from "@/constants"; //import { FlatList, View } from "react-native-reanimated/lib/typescript/Animated";
+import { images, offers } from "@/constants"; //import { FlatList, View } from "react-native-reanimated/lib/typescript/Animated";
+import cn from 'clsx';
 import { Fragment } from "react";
-import { FlatList, Image, Pressable, View } from "react-native";
+import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   console.log(offers)
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView className="flex-1 bg-white">
       <FlatList
         data={offers}
         keyExtractor={(item) => item.id.toString()}
         renderItem={
           ({ item, index }) => {
+            const isEven: boolean = index % 2 === 0;
             return (
               <View >
                 <Pressable
-                  className="offer-card"
+                  className={cn("offer-card", isEven ? 'flex-row-reverse' : 'flex-row')}
                   style={{ backgroundColor: item.color }}
+                  android_ripple={{ color: '#ffff22' }}
                 >
                   {({ pressed }) => (
                     <Fragment>
@@ -24,13 +27,20 @@ export default function Home() {
                         <Image source={item.image} className={"size-full"} resizeMode={"contain"} />
                       </View>
 
-                      <View className="offer-card_info"></View>
+                      <View className={cn("offer-card__info", isEven ? 'pl-10' : 'pr-10')}>
+                        <Text className="h1-bold text-white leading-tight">
+                          {item.title}
+                        </Text>
+                        <Image source={images.arrowRight} className="size-10" resizeMode="contain" tintColor="#fff" />
+                      </View>
                     </Fragment>
                   )}
                 </Pressable>
               </View>)
           }
-        } />
-    </SafeAreaView>
+        }
+        contentContainerClassName="pd-28 px-5"
+      />
+    </SafeAreaView >
   );
 }
