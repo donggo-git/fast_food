@@ -5,7 +5,7 @@ import { Button, Text, View } from 'react-native'
 const signUp = () => {
     return (
         <View>
-            <Text>signUp</Text>
+            <Text></Text>
             <Button title="Sign In" onPress={() => router.push("/sign-in")}></Button>
         </View>
     )
