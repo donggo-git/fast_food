@@ -10,11 +10,11 @@ const SignUp = () => {
     const [form, setForm] = useState({ name: '', email: '', password: '' })
     const submit = async () => {
         if (!form.name || !form.email || !form.password)
-            Alert.alert('Error', 'Please enter valid email address and password');
+            return Alert.alert('Error', 'Please enter valid email address and password');
 
         setIsSubmitting(true)
         try {
-            Alert.alert('Success', 'User sign in successfully')
+            Alert.alert('Success', 'User sign up successfully')
             router.replace('/');
         } catch (error: any) {
             Alert.alert('Error', error.message)
