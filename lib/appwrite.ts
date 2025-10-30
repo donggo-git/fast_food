@@ -27,9 +27,28 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
             throw Error;
 
         await signIn({ email, password });
+        const avatarUrl = avatars.getInitialsURL(name)
+
+        const newUser = await database.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userCollectionId,
+            ID.unique(),
+            {
+                accountId: newAccount.$id,
+                email,
+                name,
+                avatar: avatarUrl
+            }
+        )
     } catch (err) {
         throw new Error(err as string);
     }
 }
 
-export const signIn = async ({ email, password }: SignInParams) => { }
+export const signIn = async ({ email, password }: SignInParams) => {
+    try {
+        const session = await account.createEmailPasswordSession(email, password);
+    } catch (err) {
+        throw new Error(err as string)
+    }
+}
