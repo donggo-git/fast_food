@@ -1,7 +1,6 @@
 import { CustomButtonProps } from '@/type'
 import React from 'react'
-import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
-import { View } from 'react-native-reanimated/lib/typescript/Animated'
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
 
 const CustomButton = ({ onPress, title = "Click Me", style, textStyle, leftIcon, isLoading = false }: CustomButtonProps) => {
     return (
