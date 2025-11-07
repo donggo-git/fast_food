@@ -1,9 +1,10 @@
+import useAuthStore from '@/store/auth.store';
+import * as Sentry from '@sentry/react-native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import "./global.css";
-import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
   dsn: 'https://d36ac3cc35300604332651d38fa16582@o4510305695498240.ingest.us.sentry.io/4510305701593088',
@@ -29,6 +30,8 @@ export const unstable_settings = {
 };
 
 export default Sentry.wrap(function RootLayout() {
+  const { isLoading, fetchAuthenticatedUser } = useAuthStore();
+
   const [fontsLoaded, error] = useFonts({
     "QuickSand-Bold": require('../assets/fonts/Quicksand-Bold.ttf'),
     "QuickSand-Medium": require('../assets/fonts/Quicksand-Medium.ttf'),
